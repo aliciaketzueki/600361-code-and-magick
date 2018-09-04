@@ -1,7 +1,5 @@
 'use strict';
 
-var times = [];
-var names = [];
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
@@ -20,7 +18,7 @@ var renderCloud = function(ctx, x, y, color) {
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-var getMaxElement = function (arr) {
+var getMaxElement = function(arr) {
   var maxElement = arr[0];
 
   for (var j = 1; j < arr.length; j++) {
@@ -31,6 +29,10 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
+var getRandomArbitrary = function(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 window.renderStatistics = function(ctx, names, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + 10, 'rgba(0,0,0,0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, 'rgba(255,255,255,1)');
@@ -39,20 +41,20 @@ window.renderStatistics = function(ctx, names, times) {
   ctx.font = '16px PT Mono';
   ctx.fillText('Ура вы победили!', CLOUD_X + GAP, TEXT_GAP);
   ctx.fillText('Список результатов: ', CLOUD_X + GAP, TEXT_GAP * 1.5);
-  
   var maxTime = getMaxElement(times);
-  console.log(times);
-  console.log(maxTime);
   
+
   for (var i = 0; i < names.length; i++) {
-    ctx.fillText(Math.round(times[i]), CLOUD_X + BAR_GAP + BAR_WIDTH * i + BAR_GAP * i, -(times[i] * maxBarHeight / maxTime));
-    ctx.fillStyle = 'rgba(64,38,181,1)';
+    ctx.fillText(Math.round(times[i]), CLOUD_X + BAR_GAP + BAR_WIDTH * i + BAR_GAP * i, -(times[i] * maxBarHeight / maxTime) + CLOUD_HEIGHT - GAP * 2.5);
+
+    if (names[i] === 'Вы') {
+      ctx.fillStyle = 'rgba(255,0,0,1)';
+    } else {
+      ctx.fillStyle = 'rgba(50,5,252,' + getRandomArbitrary(0.2, 0.9);
+    }
+
     ctx.fillRect(CLOUD_X + BAR_GAP + BAR_WIDTH * i + BAR_GAP * i, CLOUD_HEIGHT - GAP * 2, BAR_WIDTH, -(times[i] * maxBarHeight / maxTime));
     ctx.fillStyle = 'rgba(0,0,0,1)';
     ctx.fillText(names[i], CLOUD_X + BAR_GAP + BAR_WIDTH * i + BAR_GAP * i, CLOUD_HEIGHT);
   }
-
-  ctx.fillRect
 };
-
-// ctx.fillRect(CLOUD_X + GAP + BAR_GAP * i, TEXT_HEIGHT + GAP + TEXT_GAP, BAR_WIDTH, times[i] * maxBarHeight / maxTime);
