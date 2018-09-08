@@ -25,33 +25,23 @@ for (var i = 0; i < 4; i++) {
   };
   heroes[i] = hero;
 }
-
 console.log(heroes);
 //Задача 3
 var similarList = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-for (var i = 0; i < heroes.length; i++) {
+var renderHeroes = function(arr) {
   var similarItem = similarWizardTemplate.cloneNode(true);
-  similarItem.querySelector('.setup-similar-label').textContent = heroes[i].name;
-  similarItem.querySelector('.wizard-coat').style.fill = heroes[i].coatColor;
-  similarItem.querySelector('.wizard-eyes').style.fill = heroes[i].eyesColor;
-
-  similarList.appendChild(similarItem);
+  similarItem.querySelector('.setup-similar-label').textContent = arr[i].name;
+  similarItem.querySelector('.wizard-coat').style.fill = arr[i].coatColor;
+  similarItem.querySelector('.wizard-eyes').style.fill = arr[i].eyesColor;
+  return similarItem;
 }
-//Задача 4
-
-
-
-/*
-На основе данных, созданных в предыдущем пункте и шаблона #similar - wizard - template создайте DOM - элементы, соответствующие случайно сгенерированным волшебникам и заполните их данными из массива:
-
-Имя персонажа name запишите как текст в блок.setup - similar - label;
-Цвет мантии coatColor задайте как цвет заливки fill в стилях элемента.wizard - coat;
-Цвет глаз eyesColor задайте как цвет заливки fill в стилях элемента.wizard - eyes. 
-
-Отрисуйте сгенерированные DOM-элементы в блок .setup-similar-list. Для вставки элементов используйте DocumentFragment.
-*/
-
-// Задание 5
+// Задача 4
+var fragment = document.createDocumentFragment();
+for (var i = 0; i < heroes.length; i++) {
+  fragment.appendChild(renderHeroes(heroes));
+}
+similarList.appendChild(fragment);
+// Задача 5
 var setupSimilar = document.querySelector('.setup-similar').classList.remove('hidden');
