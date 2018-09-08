@@ -25,9 +25,24 @@ for (var i = 0; i < 4; i++) {
   };
   heroes[i] = hero;
 }
-//Задача 3
 
-//wizardElement.querySelector('.wizard-coat').style.fill = wizards[i].coatColor;
+console.log(heroes);
+//Задача 3
+var similarList = document.querySelector('.setup-similar-list');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+
+for (var i = 0; i < heroes.length; i++) {
+  var similarItem = similarWizardTemplate.cloneNode(true);
+  similarItem.querySelector('.setup-similar-label').textContent = heroes[i].name;
+  similarItem.querySelector('.wizard-coat').style.fill = heroes[i].coatColor;
+  similarItem.querySelector('.wizard-eyes').style.fill = heroes[i].eyesColor;
+
+  similarList.appendChild(similarItem);
+}
+//Задача 4
+
+
+
 /*
 На основе данных, созданных в предыдущем пункте и шаблона #similar - wizard - template создайте DOM - элементы, соответствующие случайно сгенерированным волшебникам и заполните их данными из массива:
 
