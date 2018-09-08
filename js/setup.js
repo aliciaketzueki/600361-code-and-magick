@@ -1,7 +1,11 @@
 'use strict';
 
 // Задача 1
-document.querySelector('.setup').classList.remove('hidden');
+var removeClass = function (className, removedClass) {
+  document.querySelector(className).classList.remove(removedClass);
+};
+removeClass('.setup', 'hidden');
+
 // Задача 2
 var firstNameArr = ['Иван', 'Хуан', 'Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var surnameArr = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -9,25 +13,27 @@ var coatColorArr = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 16
 var eyesColorArr = ['black', 'red', 'blue', 'yellow', 'green'];
 
 var getRandomElement = function (arr) {
-  for (var i = 0; i < arr.length; i++) {
-    var rand = Math.floor(Math.random() * arr.length);
-    var randomElement = arr[rand];
-    arr.splice(rand, 1); // удаление из массива выбранного случайно элемента (чтобы не повторялись)
-  }
+  var rand = Math.floor(Math.random() * arr.length);
+  var randomElement = arr[rand];
+  arr.splice(rand, 1); // удаление из массива выбранного случайно элемента (чтобы не повторялись)
   return randomElement;
 };
 
-var heroes = [];
+var createArray = function (arr, firstRandomElement, secondRandomElement, thirdRandomElement, fourthRandomElement) {
+  for (var i = 0; i < 4; i++) {
+    var object = {
+      name: getRandomElement(firstRandomElement) + ' ' + getRandomElement(secondRandomElement),
+      coatColor: getRandomElement(thirdRandomElement),
+      eyesColor: getRandomElement(fourthRandomElement)
+    };
+    arr[i] = object;
+  }
+  return arr;
+};
 
-for (var i = 0; i < 4; i++) {
-  var hero = {
-    name: getRandomElement(firstNameArr) + ' ' + getRandomElement(surnameArr),
-    coatColor: getRandomElement(coatColorArr),
-    eyesColor: getRandomElement(eyesColorArr)
-  };
-  heroes[i] = hero;
-}
-// console.log(heroes);
+var heroes = [];
+createArray(heroes, firstNameArr, surnameArr, coatColorArr, eyesColorArr);
+
 // Задача 3
 var similarList = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
@@ -39,11 +45,16 @@ var renderHeroes = function (arr) {
   similarItem.querySelector('.wizard-eyes').style.fill = arr.eyesColor;
   return similarItem;
 };
+
 // Задача 4
-var fragment = document.createDocumentFragment();
-for (var j = 0; j < heroes.length; j++) {
-  fragment.appendChild(renderHeroes(heroes[j]));
-}
-similarList.appendChild(fragment);
+var addElements = function (elements, destination) {
+  var fragment = document.createDocumentFragment();
+  for (var i = 0; i < elements.length; i++) {
+    fragment.appendChild(renderHeroes(elements[i]));
+  }
+  destination.appendChild(fragment);
+};
+addElements(heroes, similarList);
+
 // Задача 5
-document.querySelector('.setup-similar').classList.remove('hidden');
+removeClass('.setup-similar', 'hidden');
