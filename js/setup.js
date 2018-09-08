@@ -1,6 +1,5 @@
 // Задача 1
-var setup = document.querySelector('.setup');
-setup.classList.remove('hidden');
+var setup = document.querySelector('.setup').classList.remove('hidden');
 // Задача 2
 var firstNameArr = ['Иван', 'Хуан', 'Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var surnameArr = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -11,6 +10,7 @@ var getRandomElement = function (arr) {
   for (var i = 0; i < arr.length; i++) {
     var rand = Math.floor(Math.random() * arr.length);
     var randomElement = arr[rand];
+    arr.splice(rand, 1); // удаление из массива выбранного случайно элемента (чтобы не повторялись)
   }
   return randomElement;
 };
@@ -27,10 +27,16 @@ for (var i = 0; i < 4; i++) {
 }
 //Задача 3
 
+//wizardElement.querySelector('.wizard-coat').style.fill = wizards[i].coatColor;
 /*
 На основе данных, созданных в предыдущем пункте и шаблона #similar - wizard - template создайте DOM - элементы, соответствующие случайно сгенерированным волшебникам и заполните их данными из массива:
 
 Имя персонажа name запишите как текст в блок.setup - similar - label;
 Цвет мантии coatColor задайте как цвет заливки fill в стилях элемента.wizard - coat;
 Цвет глаз eyesColor задайте как цвет заливки fill в стилях элемента.wizard - eyes. 
+
+Отрисуйте сгенерированные DOM-элементы в блок .setup-similar-list. Для вставки элементов используйте DocumentFragment.
 */
+
+// Задание 5
+var setupSimilar = document.querySelector('.setup-similar').classList.remove('hidden');
