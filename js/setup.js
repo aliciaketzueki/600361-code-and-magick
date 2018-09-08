@@ -1,5 +1,7 @@
+'use strict';
+
 // Задача 1
-var setup = document.querySelector('.setup').classList.remove('hidden');
+document.querySelector('.setup').classList.remove('hidden');
 // Задача 2
 var firstNameArr = ['Иван', 'Хуан', 'Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var surnameArr = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -25,23 +27,23 @@ for (var i = 0; i < 4; i++) {
   };
   heroes[i] = hero;
 }
-console.log(heroes);
-//Задача 3
+// console.log(heroes);
+// Задача 3
 var similarList = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
-var renderHeroes = function(arr) {
+var renderHeroes = function (arr) {
   var similarItem = similarWizardTemplate.cloneNode(true);
   similarItem.querySelector('.setup-similar-label').textContent = arr[i].name;
   similarItem.querySelector('.wizard-coat').style.fill = arr[i].coatColor;
   similarItem.querySelector('.wizard-eyes').style.fill = arr[i].eyesColor;
   return similarItem;
-}
+};
 // Задача 4
 var fragment = document.createDocumentFragment();
-for (var i = 0; i < heroes.length; i++) {
+for (var j = 0; j < heroes.length; j++) {
   fragment.appendChild(renderHeroes(heroes));
 }
 similarList.appendChild(fragment);
 // Задача 5
-var setupSimilar = document.querySelector('.setup-similar').classList.remove('hidden');
+document.querySelector('.setup-similar').classList.remove('hidden');
