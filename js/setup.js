@@ -34,15 +34,15 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template').c
 
 var renderHeroes = function (arr) {
   var similarItem = similarWizardTemplate.cloneNode(true);
-  similarItem.querySelector('.setup-similar-label').textContent = arr[i].name;
-  similarItem.querySelector('.wizard-coat').style.fill = arr[i].coatColor;
-  similarItem.querySelector('.wizard-eyes').style.fill = arr[i].eyesColor;
+  similarItem.querySelector('.setup-similar-label').textContent = arr.name;
+  similarItem.querySelector('.wizard-coat').style.fill = arr.coatColor;
+  similarItem.querySelector('.wizard-eyes').style.fill = arr.eyesColor;
   return similarItem;
 };
 // Задача 4
 var fragment = document.createDocumentFragment();
 for (var j = 0; j < heroes.length; j++) {
-  fragment.appendChild(renderHeroes(heroes));
+  fragment.appendChild(renderHeroes(heroes[j]));
 }
 similarList.appendChild(fragment);
 // Задача 5
