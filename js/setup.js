@@ -19,12 +19,12 @@ var getRandomElement = function (arr) {
   return randomElement;
 };
 
-var createArray = function (arr, firstRandomElement, secondRandomElement, thirdRandomElement, fourthRandomElement) {
+var createArray = function (arr) {
   for (var i = 0; i < 4; i++) {
     var object = {
-      name: getRandomElement(firstRandomElement) + ' ' + getRandomElement(secondRandomElement),
-      coatColor: getRandomElement(thirdRandomElement),
-      eyesColor: getRandomElement(fourthRandomElement)
+      name: getRandomElement(firstNameArr) + ' ' + getRandomElement(surnameArr),
+      coatColor: getRandomElement(coatColorArr),
+      eyesColor: getRandomElement(eyesColorArr)
     };
     arr[i] = object;
   }
@@ -32,7 +32,7 @@ var createArray = function (arr, firstRandomElement, secondRandomElement, thirdR
 };
 
 var heroes = [];
-createArray(heroes, firstNameArr, surnameArr, coatColorArr, eyesColorArr);
+createArray(heroes);
 
 // Задача 3
 var similarList = document.querySelector('.setup-similar-list');
@@ -47,14 +47,14 @@ var renderHeroes = function (arr) {
 };
 
 // Задача 4
-var addElements = function (elements, destination) {
+var addElements = function (elements) {
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < elements.length; i++) {
     fragment.appendChild(renderHeroes(elements[i]));
   }
-  destination.appendChild(fragment);
+  similarList.appendChild(fragment);
 };
-addElements(heroes, similarList);
+addElements(heroes);
 
 // Задача 5
 removeClass('.setup-similar', 'hidden');
