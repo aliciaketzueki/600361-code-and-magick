@@ -18,6 +18,11 @@ var getRandomElement = function (arr) {
   arr.splice(rand, 1); // удаление из массива выбранного случайно элемента (чтобы не повторялись)
   return randomElement;
 };
+var getRandomElementWithoutSplice = function (arr) {
+  var rand = Math.floor(Math.random() * arr.length);
+  var randomElement = arr[rand];
+  return randomElement;
+}
 
 var createArray = function (arr) {
   for (var i = 0; i < 4; i++) {
@@ -101,9 +106,24 @@ setupClose.addEventListener('keydown', function (evt) {
   }
 });
 
-/* 
-Если диалог открыт, нажатие на кнопку «Сохранить» приводит к отправке формы
-Если диалог открыт и фокус находится на кнопке «Сохранить», нажатие на ENTER приводит к отправке формы
-*/
+// Задача 2.3
+var wizardCoat = document.querySelector('.setup-wizard').querySelector('.wizard-coat');
+wizardCoat.addEventListener('click', function () {
+  wizardCoat.style.fill = getRandomElementWithoutSplice(coatColorArr);
+});
 
-// Задача 2.2
+// Задача 2.4
+var wizardEyes = document.querySelector('.setup-wizard').querySelector('.wizard-eyes');
+wizardEyes.addEventListener('click', function () {
+  wizardEyes.style.fill = getRandomElementWithoutSplice(eyesColorArr);
+});
+/*
+Изменение цвета мантии персонажа по нажатию. Цвет мантии .setup-wizard .wizard-coat должен обновляться по нажатию на неё. Цвет мантии задаётся через изменение инлайнового CSS-свойства fill для элемента. Цвет должен сменяться произвольным образом на один из следующих цветов:
+
+rgb(101, 137, 164)
+rgb(241, 43, 107)
+rgb(146, 100, 161)
+rgb(56, 159, 117)
+rgb(215, 210, 55)
+rgb(0, 0, 0)
+*/
