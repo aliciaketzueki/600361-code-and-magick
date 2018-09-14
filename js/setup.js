@@ -12,17 +12,28 @@ var surnameArr = ['да Марья', 'Верон', 'Мирабелла', 'Вал
 var coatColorArr = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var eyesColorArr = ['black', 'red', 'blue', 'yellow', 'green'];
 
+var createArr = function (arrStart, arrLength) {
+  var arr = [];
+  for (var i = arrStart; i < arrLength; i++) {
+    arr[i] = i;
+  }
+  return arr;
+};
+
 var getRandomElement = function (arr) {
+  var randArr = createArr(0, arr.length - 1);
   var rand = Math.floor(Math.random() * arr.length);
-  var randomElement = arr[rand];
-  arr.splice(rand, 1); // удаление из массива выбранного случайно элемента (чтобы не повторялись)
+  if (rand === randArr[0]) {
+    return getRandomElement(arr);
+  } else {
+    var randomElement = arr[rand];   //// НЕ ПОЛУЧАЕТСЯ!!!!
+    var swap1 = rand;
+    var swap2 = randArr[0];
+    rand = swap2;
+    randArr[0] = swap1;
+  }
   return randomElement;
 };
-var getRandomElementWithoutSplice = function (arr) {
-  var rand = Math.floor(Math.random() * arr.length);
-  var randomElement = arr[rand];
-  return randomElement;
-}
 
 var createArray = function (arr) {
   for (var i = 0; i < 4; i++) {
@@ -108,22 +119,33 @@ setupClose.addEventListener('keydown', function (evt) {
 
 // Задача 2.3
 var wizardCoat = document.querySelector('.setup-wizard').querySelector('.wizard-coat');
+var wizardCoatInput = document.getElementsByName('coat-color');
+
+var changeWizardColor = function (arr, wizardColor, wizardColorInput) {
+  var newWizardColor = getRandomElement(arr);
+  wizardColor.style.fill = newWizardColor;
+  wizardColorInput[0].value = newWizardColor;
+};
+
 wizardCoat.addEventListener('click', function () {
-  wizardCoat.style.fill = getRandomElementWithoutSplice(coatColorArr);
+  changeWizardColor(coatColorArr, wizardCoat, wizardCoatInput);
 });
 
 // Задача 2.4
 var wizardEyes = document.querySelector('.setup-wizard').querySelector('.wizard-eyes');
-wizardEyes.addEventListener('click', function () {
-  wizardEyes.style.fill = getRandomElementWithoutSplice(eyesColorArr);
-});
-/*
-Изменение цвета мантии персонажа по нажатию. Цвет мантии .setup-wizard .wizard-coat должен обновляться по нажатию на неё. Цвет мантии задаётся через изменение инлайнового CSS-свойства fill для элемента. Цвет должен сменяться произвольным образом на один из следующих цветов:
+var wizardEyesInput = document.getElementsByName('eyes-color');
 
-rgb(101, 137, 164)
-rgb(241, 43, 107)
-rgb(146, 100, 161)
-rgb(56, 159, 117)
-rgb(215, 210, 55)
-rgb(0, 0, 0)
-*/
+wizardEyes.addEventListener('click', function () {
+  changeWizardColor(eyesColorArr, wizardEyes, wizardEyesInput);
+});
+
+// Задача 2.5
+var fireballColorArr = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+var fireballColor = document.querySelector('.setup-fireball-wrap');
+var fireballColorInput = document.getElementsByName('fireball-color');
+
+fireballColor.addEventListener('click', function () {
+  var newFireballColor = getRandomElement(fireballColorArr);
+  fireballColor.style.background = newFireballColor;
+  fireballColorInput[0].value = newFireballColor;
+});
