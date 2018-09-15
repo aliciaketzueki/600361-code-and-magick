@@ -26,7 +26,8 @@ var getRandomElement = function (arr) {
   if (rand === randArr[0]) {
     return getRandomElement(arr);
   } else {
-    var randomElement = arr[rand];   //// НЕ ПОЛУЧАЕТСЯ!!!!
+    // НЕ ПОЛУЧАЕТСЯ!!!!
+    var randomElement = arr[rand];
     var swap1 = rand;
     var swap2 = randArr[0];
     rand = swap2;
