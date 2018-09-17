@@ -1,5 +1,7 @@
 'use strict';
-
+// Константы
+var ESC_KEYDOWN = 27;
+var ENTER_KEYDOWN = 13;
 // Задача 1.1
 var removeClass = function (className, removedClass) {
   document.querySelector(className).classList.remove(removedClass);
@@ -77,76 +79,88 @@ addElements(heroes);
 removeClass('.setup-similar', 'hidden');
 
 // Задача 2.1
-var ESC_KEYDOWN = 27;
-var ENTER_KEYDOWN = 13;
+var viewSetupWindow = function () {
+  var openSetupWindow = function () {
+    setup.classList.remove('hidden');
+  };
 
-var openSetupWindow = function () {
-  setup.classList.remove('hidden');
-};
+  var closeSetupWindow = function () {
+    setup.classList.add('hidden');
+  };
 
-var closeSetupWindow = function () {
-  setup.classList.add('hidden');
-};
+  var setupOpen = document.querySelector('.setup-open');
+  var setup = document.querySelector('.setup');
+  var setupClose = setup.querySelector('.setup-close');
 
-var setupOpen = document.querySelector('.setup-open');
-var setup = document.querySelector('.setup');
-var setupClose = setup.querySelector('.setup-close');
+  setupOpen.addEventListener('click', function () {
+    openSetupWindow();
 
-setupOpen.addEventListener('click', function () {
-  openSetupWindow();
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === ESC_KEYDOWN) {
+        closeSetupWindow();
+      }
+    });
+  });
 
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ESC_KEYDOWN) {
+  setupOpen.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEYDOWN) {
+      openSetupWindow();
+    }
+  });
+
+  setupClose.addEventListener('click', function () {
+    closeSetupWindow();
+  });
+
+  setupClose.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEYDOWN) {
       closeSetupWindow();
     }
   });
-});
+};
 
-setupOpen.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ENTER_KEYDOWN) {
-    openSetupWindow();
-  }
-});
-
-setupClose.addEventListener('click', function () {
-  closeSetupWindow();
-});
-
-setupClose.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ENTER_KEYDOWN) {
-    closeSetupWindow();
-  }
-});
-
+viewSetupWindow();
 // Задача 2.3
-var wizardCoat = document.querySelector('.setup-wizard').querySelector('.wizard-coat');
-var wizardCoatInput = document.getElementsByName('coat-color');
-
 var changeWizardColor = function (arr, wizardColor, wizardColorInput) {
   var newWizardColor = getRandomElement(arr);
   wizardColor.style.fill = newWizardColor;
   wizardColorInput[0].value = newWizardColor;
 };
 
-wizardCoat.addEventListener('click', function () {
-  changeWizardColor(coatColorArr, wizardCoat, wizardCoatInput);
-});
+var changeCoatColor = function () {
+  var wizardCoat = document.querySelector('.setup-wizard').querySelector('.wizard-coat');
+  var wizardCoatInput = document.getElementsByName('coat-color');
+
+  wizardCoat.addEventListener('click', function () {
+    changeWizardColor(coatColorArr, wizardCoat, wizardCoatInput);
+  });
+};
+
+changeCoatColor();
 
 // Задача 2.4
-var wizardEyes = document.querySelector('.setup-wizard').querySelector('.wizard-eyes');
-var wizardEyesInput = document.getElementsByName('eyes-color');
+var changeEyesColor = function () {
+  var wizardEyes = document.querySelector('.setup-wizard').querySelector('.wizard-eyes');
+  var wizardEyesInput = document.getElementsByName('eyes-color');
 
-wizardEyes.addEventListener('click', function () {
-  changeWizardColor(eyesColorArr, wizardEyes, wizardEyesInput);
-});
+  wizardEyes.addEventListener('click', function () {
+    changeWizardColor(eyesColorArr, wizardEyes, wizardEyesInput);
+  });
+};
+
+ changeEyesColor();
 
 // Задача 2.5
-var fireballColorArr = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-var fireballColor = document.querySelector('.setup-fireball-wrap');
-var fireballColorInput = document.getElementsByName('fireball-color');
+var changeFireballColor = function () {
+  var fireballColorArr = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+  var fireballColor = document.querySelector('.setup-fireball-wrap');
+  var fireballColorInput = document.getElementsByName('fireball-color');
 
-fireballColor.addEventListener('click', function () {
-  var newFireballColor = getRandomElement(fireballColorArr);
-  fireballColor.style.background = newFireballColor;
-  fireballColorInput[0].value = newFireballColor;
-});
+  fireballColor.addEventListener('click', function () {
+    var newFireballColor = getRandomElement(fireballColorArr);
+    fireballColor.style.background = newFireballColor;
+    fireballColorInput[0].value = newFireballColor;
+  });
+};
+
+changeFireballColor();
