@@ -2,11 +2,34 @@
 // Константы
 var ESC_KEYDOWN = 27;
 var ENTER_KEYDOWN = 13;
+// Функция инициализации
+var init = function () {
+  removeClass('.setup', 'hidden');
+
+  var heroes = [];
+  createArray(heroes);
+
+  var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+  var similarList = document.querySelector('.setup-similar-list');
+  addElements(heroes, similarWizardTemplate, similarList);
+
+  removeClass('.setup-similar', 'hidden');
+
+  var setup = document.querySelector('.setup');
+  var setupOpen = document.querySelector('.setup-open');
+  var setupClose = setup.querySelector('.setup-close');
+  openSetupWindow(setupOpen, setup);
+  closeSetupWindow(setupClose, setup);
+
+  changeCoatColor();
+  changeEyesColor();
+  changeFireballColor();
+}
+
 // Задача 1.1
 var removeClass = function (className, removedClass) {
   document.querySelector(className).classList.remove(removedClass);
 };
-removeClass('.setup', 'hidden');
 
 // Задача 1.2
 var firstNameArr = ['Иван', 'Хуан', 'Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
@@ -50,15 +73,9 @@ var createArray = function (arr) {
   return arr;
 };
 
-var heroes = [];
-createArray(heroes);
-
 // Задача 1.3
-var similarList = document.querySelector('.setup-similar-list');
-var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-
-var renderHeroes = function (arr) {
-  var similarItem = similarWizardTemplate.cloneNode(true);
+var renderHeroes = function (arr, element) {
+  var similarItem = element.cloneNode(true);
   similarItem.querySelector('.setup-similar-label').textContent = arr.name;
   similarItem.querySelector('.wizard-coat').style.fill = arr.coatColor;
   similarItem.querySelector('.wizard-eyes').style.fill = arr.eyesColor;
@@ -66,60 +83,53 @@ var renderHeroes = function (arr) {
 };
 
 // Задача 1.4
-var addElements = function (elements) {
+var addElements = function (elements, element, destination) {
   var fragment = document.createDocumentFragment();
   for (var i = 0; i < elements.length; i++) {
-    fragment.appendChild(renderHeroes(elements[i]));
+    fragment.appendChild(renderHeroes(elements[i], element));
   }
-  similarList.appendChild(fragment);
+  destination.appendChild(fragment);
 };
-addElements(heroes);
-
-// Задача 1.5
-removeClass('.setup-similar', 'hidden');
 
 // Задача 2.1
-var viewSetupWindow = function () {
-  var openSetupWindow = function () {
-    setup.classList.remove('hidden');
-  };
+var viewSetupWindow = function (element) {
+  element.classList.remove('hidden');
+};
 
-  var closeSetupWindow = function () {
-    setup.classList.add('hidden');
-  };
+var hideSetupWindow = function (element) {
+  element.classList.add('hidden');
+};
 
-  var setupOpen = document.querySelector('.setup-open');
-  var setup = document.querySelector('.setup');
-  var setupClose = setup.querySelector('.setup-close');
-
-  setupOpen.addEventListener('click', function () {
-    openSetupWindow();
+var openSetupWindow = function (target, element) {
+  target.addEventListener('click', function () {
+    viewSetupWindow(element);
 
     document.addEventListener('keydown', function (evt) {
       if (evt.keyCode === ESC_KEYDOWN) {
-        closeSetupWindow();
+        hideSetupWindow(element);
       }
     });
   });
 
-  setupOpen.addEventListener('keydown', function (evt) {
+  target.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_KEYDOWN) {
-      openSetupWindow();
-    }
-  });
-
-  setupClose.addEventListener('click', function () {
-    closeSetupWindow();
-  });
-
-  setupClose.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYDOWN) {
-      closeSetupWindow();
+      viewSetupWindow(element);
     }
   });
 };
 
-viewSetupWindow();
+var closeSetupWindow = function (target, element) {
+  target.addEventListener('click', function () {
+    hideSetupWindow(element);
+  });
+
+  target.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEYDOWN) {
+      hideSetupWindow(element);
+    }
+  });
+};
+
 // Задача 2.3
 var changeWizardColor = function (arr, wizardColor, wizardColorInput) {
   var newWizardColor = getRandomElement(arr);
@@ -136,8 +146,6 @@ var changeCoatColor = function () {
   });
 };
 
-changeCoatColor();
-
 // Задача 2.4
 var changeEyesColor = function () {
   var wizardEyes = document.querySelector('.setup-wizard').querySelector('.wizard-eyes');
@@ -147,8 +155,6 @@ var changeEyesColor = function () {
     changeWizardColor(eyesColorArr, wizardEyes, wizardEyesInput);
   });
 };
-
- changeEyesColor();
 
 // Задача 2.5
 var changeFireballColor = function () {
@@ -163,4 +169,4 @@ var changeFireballColor = function () {
   });
 };
 
-changeFireballColor();
+init();
