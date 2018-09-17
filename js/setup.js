@@ -24,7 +24,7 @@ var init = function () {
   changeCoatColor();
   changeEyesColor();
   changeFireballColor();
-}
+};
 
 // Задача 1.1
 var removeClass = function (className, removedClass) {
