@@ -1,12 +1,12 @@
 'use strict';
 (function () {
-// Функция создания массива волшебников
+  // Функция создания массива волшебников
   var createArray = function (arr) {
     for (var i = 0; i < 4; i++) {
       var object = {
-        name: window.getRandomElement(window.arr.FIRST_NAME_ARR) + ' ' + window.getRandomElement(window.arr.SURNAME_ARR),
-        coatColor: window.getRandomElement(window.arr.COAT_COLOR_ARR),
-        eyesColor: window.getRandomElement(window.arr.EYES_COLOR_ARR)
+        name: window.util.getRandomElement(window.arr.FIRST_NAME_ARR) + ' ' + window.util.getRandomElement(window.arr.SURNAME_ARR),
+        coatColor: window.util.getRandomElement(window.arr.COAT_COLOR_ARR),
+        eyesColor: window.util.getRandomElement(window.arr.EYES_COLOR_ARR)
       };
       arr[i] = object;
     }
@@ -16,10 +16,7 @@
   var heroes = [];
   createArray(heroes);
 
-// Функция создания DOM-элементов
-  var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-  var similarList = document.querySelector('.setup-similar-list');
-
+  // Функция создания DOM-элементов
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
   var similarList = document.querySelector('.setup-similar-list');
 
@@ -31,7 +28,7 @@
     return similarItem;
   };
 
-// Функция добавления DOM-элементов
+  // Функция добавления DOM-элементов
   var addElements = function (elements, element, destination) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < elements.length; i++) {
