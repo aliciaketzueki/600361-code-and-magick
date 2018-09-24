@@ -18,12 +18,20 @@ var init = function () {
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
-  openSetupWindow(setupOpen, setup);
-  closeSetupWindow(setupClose, setup);
+
+  var originalCoordinates = {
+    x: setup.style.left,
+    y: setup.style.top,
+  };
+
+  openSetupWindow(setupOpen, setup, originalCoordinates);
+  closeSetupWindow(setupClose, setup, originalCoordinates);
 
   changeCoatColor();
   changeEyesColor();
   changeFireballColor();
+
+  changeDialogPosition(setup);
 };
 
 // Задача 1.1
@@ -100,13 +108,19 @@ var hideSetupWindow = function (element) {
   element.classList.add('hidden');
 };
 
-var openSetupWindow = function (target, element) {
+var resetCoordinates = function (element, coords) {
+  element.style.left = coords.x;
+  element.style.top = coords.y;
+};
+
+var openSetupWindow = function (target, element, coords) {
   target.addEventListener('click', function () {
     viewSetupWindow(element);
 
     document.addEventListener('keydown', function (evt) {
       if (evt.keyCode === ESC_KEYDOWN) {
         hideSetupWindow(element);
+        resetCoordinates(element, coords);
       }
     });
   });
@@ -118,14 +132,16 @@ var openSetupWindow = function (target, element) {
   });
 };
 
-var closeSetupWindow = function (target, element) {
+var closeSetupWindow = function (target, element, coords) {
   target.addEventListener('click', function () {
     hideSetupWindow(element);
+    resetCoordinates(element, coords);
   });
 
   target.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_KEYDOWN) {
       hideSetupWindow(element);
+      resetCoordinates(element, coords);
     }
   });
 };
@@ -166,6 +182,58 @@ var changeFireballColor = function () {
     var newFireballColor = getRandomElement(fireballColorArr);
     fireballColor.style.background = newFireballColor;
     fireballColorInput[0].value = newFireballColor;
+  });
+};
+
+// Задача 3
+var changeDialogPosition = function (area) {
+  var dialogHandle = area.querySelector('.upload');
+
+  dialogHandle.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
+
+    var startCoordinates = {
+      x: evt.clientX,
+      y: evt.clientY
+    };
+
+    var dragged = false;
+
+    var onMouseMove = function (moveEvt) {
+      moveEvt.preventDefault();
+      dragged = true;
+
+      var shift = {
+        x: startCoordinates.x - moveEvt.clientX,
+        y: startCoordinates.y - moveEvt.clientY
+      };
+
+      startCoordinates = {
+        x: moveEvt.clientX,
+        y: moveEvt.clientY
+      };
+
+      area.style.top = (area.offsetTop - shift.y) + 'px';
+      area.style.left = (area.offsetLeft - shift.x) + 'px';
+    };
+
+    var onMouseUp = function (upEvt) {
+      upEvt.preventDefault();
+
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+
+      if (dragged) {
+        var onClickPreventDefault = function (evnt) {
+          evnt.preventDefault();
+          dialogHandle.removeEventListener('click', onClickPreventDefault);
+        };
+        dialogHandle.addEventListener('click', onClickPreventDefault);
+      }
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
   });
 };
 
