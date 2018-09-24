@@ -1,7 +1,7 @@
 'use strict';
 (function () {
 // Функция движения диалогового окна
-  var dialogHandle = setup.querySelector('.upload');
+  var dialogHandle = window.setup.querySelector('.upload');
 
   dialogHandle.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -27,8 +27,8 @@
         y: moveEvt.clientY
       };
 
-      setup.style.top = (setup.offsetTop - shift.y) + 'px';
-      setup.style.left = (setup.offsetLeft - shift.x) + 'px';
+      window.setup.style.top = (window.setup.offsetTop - shift.y) + 'px';
+      window.setup.style.left = (window.setup.offsetLeft - shift.x) + 'px';
     };
 
     var onMouseUp = function (upEvt) {

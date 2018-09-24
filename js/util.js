@@ -13,7 +13,7 @@
     EYES_COLOR_ARR: ['black', 'red', 'blue', 'yellow', 'green'],
     FIREBALL_COLOR_ARR: ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848']
   };
- 
+
   window.util = {
     // Функция удаления класса
     removeClass: function (className, removedClass) {

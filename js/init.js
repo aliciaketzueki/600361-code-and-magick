@@ -1,5 +1,6 @@
 'use strict';
 // Функция инициализации
+/*
 (function () {
   removeClass('.setup', 'hidden');
 
@@ -30,3 +31,4 @@
 
   changeDialogPosition(setup);
 })();
+*/
