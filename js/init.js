@@ -4,11 +4,11 @@
   window.util.removeClass('.setup', 'hidden');
 
   var heroes = [];
-  window.createArray(heroes);
+  window.setup.createArray(heroes);
 
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
   var similarList = document.querySelector('.setup-similar-list');
-  window.addElements(heroes, similarWizardTemplate, similarList);
+  window.setup.addElements(heroes, similarWizardTemplate, similarList);
 
   window.util.removeClass('.setup-similar', 'hidden');
 
@@ -21,12 +21,12 @@
     y: setup.style.top,
   };
 
-  window.openSetupWindow(setupOpen, setup, originalCoordinates);
-  window.closeSetupWindow(setupClose, setup, originalCoordinates);
+  window.dialog.openSetupWindow(setupOpen, setup, originalCoordinates);
+  window.dialog.closeSetupWindow(setupClose, setup, originalCoordinates);
 
-  window.changeCoatColor();
-  window.changeEyesColor();
-  window.changeFireballColor();
+  window.changeWizard.changeCoatColor();
+  window.changeWizard.changeEyesColor();
+  window.changeWizard.changeFireballColor();
 
-  window.changeDialogPosition(setup);
+  window.dialogMove.changeDialogPosition(setup);
 })();

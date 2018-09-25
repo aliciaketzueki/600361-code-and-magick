@@ -1,18 +1,5 @@
 'use strict';
-(function () {
-  // Функция создания массива волшебников
-  window.createArray = function (arr) {
-    for (var i = 0; i < 4; i++) {
-      var object = {
-        name: window.util.getRandomElement(window.arr.FIRST_NAME_ARR) + ' ' + window.util.getRandomElement(window.arr.SURNAME_ARR),
-        coatColor: window.util.getRandomElement(window.arr.COAT_COLOR_ARR),
-        eyesColor: window.util.getRandomElement(window.arr.EYES_COLOR_ARR)
-      };
-      arr[i] = object;
-    }
-    return arr;
-  };
-
+window.setup = (function () {
   // Функция создания DOM-элементов
   var renderHeroes = function (arr, element) {
     var similarItem = element.cloneNode(true);
@@ -22,12 +9,26 @@
     return similarItem;
   };
 
-  // Функция добавления DOM-элементов
-  window.addElements = function (elements, element, destination) {
-    var fragment = document.createDocumentFragment();
-    for (var i = 0; i < elements.length; i++) {
-      fragment.appendChild(renderHeroes(elements[i], element));
+  return {
+    // Функция создания массива волшебников
+    createArray: function (arr) {
+      for (var i = 0; i < 4; i++) {
+        var object = {
+          name: window.util.getRandomElement(window.const.FIRST_NAME_ARR) + ' ' + window.util.getRandomElement(window.const.SURNAME_ARR),
+          coatColor: window.util.getRandomElement(window.const.COAT_COLOR_ARR),
+          eyesColor: window.util.getRandomElement(window.const.EYES_COLOR_ARR)
+        };
+        arr[i] = object;
+      }
+      return arr;
+    },
+    // Функция добавления DOM-элементов
+    addElements: function (arr, element, destination) {
+      var fragment = document.createDocumentFragment();
+      for (var i = 0; i < arr.length; i++) {
+        fragment.appendChild(renderHeroes(arr[i], element));
+      }
+      destination.appendChild(fragment);
     }
-    destination.appendChild(fragment);
   };
 })();
