@@ -7,7 +7,7 @@
     wizardColorInput[0].value = newWizardColor;
   };
   // Функция изменения цвета мантии
-  var changeCoatColor = function () {
+  window.changeCoatColor = function () {
     var wizardCoat = document.querySelector('.setup-wizard').querySelector('.wizard-coat');
     var wizardCoatInput = document.getElementsByName('coat-color');
 
@@ -17,7 +17,7 @@
   };
 
   // Функция изменения цвета глаз
-  var changeEyesColor = function () {
+  window.changeEyesColor = function () {
     var wizardEyes = document.querySelector('.setup-wizard').querySelector('.wizard-eyes');
     var wizardEyesInput = document.getElementsByName('eyes-color');
 
@@ -27,7 +27,7 @@
   };
 
   // Функция изменения цвета фаербола
-  var changeFireballColor = function () {
+  window.changeFireballColor = function () {
     var fireballColor = document.querySelector('.setup-fireball-wrap');
     var fireballColorInput = document.getElementsByName('fireball-color');
 
@@ -37,8 +37,4 @@
       fireballColorInput[0].value = newFireballColor;
     });
   };
-
-  changeCoatColor();
-  changeEyesColor();
-  changeFireballColor();
 })();

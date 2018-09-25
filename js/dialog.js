@@ -1,15 +1,5 @@
 'use strict';
 (function () {
-  var setupOpen = document.querySelector('.setup-open');
-  var setupClose = window.setup.querySelector('.setup-close');
-
-  window.util.removeClass('.setup', 'hidden');
-  window.util.removeClass('.setup-similar', 'hidden');
-
-  var originalCoordinates = {
-    x: window.setup.style.left,
-    y: window.setup.style.top,
-  };
   // Открыть окно
   var viewSetupWindow = function (element) {
     element.classList.remove('hidden');
@@ -24,7 +14,7 @@
     element.style.top = coords.y;
   };
   // Функция открытия диалогового окна
-  var openSetupWindow = function (target, element, coords) {
+  window.openSetupWindow = function (target, element, coords) {
     target.addEventListener('click', function () {
       viewSetupWindow(element);
 
@@ -43,7 +33,7 @@
     });
   };
   // Функция закрытия диалогового окна
-  var closeSetupWindow = function (target, element, coords) {
+  window.closeSetupWindow = function (target, element, coords) {
     target.addEventListener('click', function () {
       hideSetupWindow(element);
       resetCoordinates(element, coords);
@@ -56,7 +46,4 @@
       }
     });
   };
-
-  openSetupWindow(setupOpen, window.setup, originalCoordinates);
-  closeSetupWindow(setupClose, window.setup, originalCoordinates);
 })();

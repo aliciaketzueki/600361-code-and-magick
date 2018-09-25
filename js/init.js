@@ -1,17 +1,16 @@
 'use strict';
 // Функция инициализации
-/*
 (function () {
-  removeClass('.setup', 'hidden');
+  window.util.removeClass('.setup', 'hidden');
 
   var heroes = [];
-  createArray(heroes);
+  window.createArray(heroes);
 
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
   var similarList = document.querySelector('.setup-similar-list');
-  addElements(heroes, similarWizardTemplate, similarList);
+  window.addElements(heroes, similarWizardTemplate, similarList);
 
-  removeClass('.setup-similar', 'hidden');
+  window.util.removeClass('.setup-similar', 'hidden');
 
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
@@ -22,13 +21,12 @@
     y: setup.style.top,
   };
 
-  openSetupWindow(setupOpen, setup, originalCoordinates);
-  closeSetupWindow(setupClose, setup, originalCoordinates);
+  window.openSetupWindow(setupOpen, setup, originalCoordinates);
+  window.closeSetupWindow(setupClose, setup, originalCoordinates);
 
-  changeCoatColor();
-  changeEyesColor();
-  changeFireballColor();
+  window.changeCoatColor();
+  window.changeEyesColor();
+  window.changeFireballColor();
 
-  changeDialogPosition(setup);
+  window.changeDialogPosition(setup);
 })();
-*/

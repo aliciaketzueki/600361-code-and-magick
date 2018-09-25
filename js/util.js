@@ -39,5 +39,4 @@
       return randomElement;
     }
   };
-  window.setup = document.querySelector('.setup');
 })();
