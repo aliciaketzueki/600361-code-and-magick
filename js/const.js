@@ -1,6 +1,6 @@
 'use strict';
-window.const = (function () {
-  return {
+(function () {
+  window.const = {
     ESC_KEYDOWN: 27,
     ENTER_KEYDOWN: 13,
     FIRST_NAME_ARR: ['Иван', 'Хуан', 'Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'],

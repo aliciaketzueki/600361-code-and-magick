@@ -1,5 +1,5 @@
 'use strict';
-window.setup = (function () {
+(function () {
   // Функция создания DOM-элементов
   var renderHeroes = function (arr, element) {
     var similarItem = element.cloneNode(true);
@@ -9,7 +9,7 @@ window.setup = (function () {
     return similarItem;
   };
 
-  return {
+  window.setup = {
     // Функция создания массива волшебников
     createArray: function (arr) {
       for (var i = 0; i < 4; i++) {

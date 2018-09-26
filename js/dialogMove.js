@@ -1,7 +1,7 @@
 'use strict';
-window.dialogMove = (function () {
+(function () {
 // Функция движения диалогового окна
-  return {
+  window.dialogMove = {
     changeDialogPosition: function (element) {
       var dialogHandle = element.querySelector('.upload');
 

@@ -1,12 +1,12 @@
 'use strict';
-window.changeWizard = (function () {
+(function () {
   // Функция изменения цвета
   var changeWizardColor = function (arr, wizardColor, wizardColorInput) {
     var newWizardColor = window.util.getRandomElement(arr);
     wizardColor.style.fill = newWizardColor;
     wizardColorInput[0].value = newWizardColor;
   };
-  return {
+  window.changeWizard = {
     // Функция изменения цвета мантии
     changeCoatColor: function () {
       var wizardCoat = document.querySelector('.setup-wizard').querySelector('.wizard-coat');

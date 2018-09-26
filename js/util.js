@@ -1,6 +1,6 @@
 'use strict';
-window.util = (function () {
-  return {
+(function () {
+  window.util = {
     // Функция удаления класса
     removeClass: function (className, removedClass) {
       document.querySelector(className).classList.remove(removedClass);

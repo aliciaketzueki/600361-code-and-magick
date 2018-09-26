@@ -1,5 +1,5 @@
 'use strict';
-window.dialog = (function () {
+(function () {
   // Открыть окно
   var viewSetupWindow = function (element) {
     element.classList.remove('hidden');
@@ -13,7 +13,7 @@ window.dialog = (function () {
     element.style.left = coords.x;
     element.style.top = coords.y;
   };
-  return {
+  window.dialog = {
     // Функция открытия диалогового окна
     openSetupWindow: function (target, element, coords) {
       target.addEventListener('click', function () {
