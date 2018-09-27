@@ -1,7 +1,7 @@
 'use strict';
 (function () {
   window.backend = {
-    // Загрузка данных
+    // Загрузка данных c сервера
     load: function (onLoad, onError) {
       var url = 'https://js.dump.academy/code-and-magick/data';
 
@@ -32,7 +32,7 @@
       xhr.addEventListener('timeout', function () {
         onError('Запрос не успел выполнится за ' + xhr.timeout + 'мс');
       });
-      xhr.timeout = 100; 
+      xhr.timeout = 100;
 
       xhr.open('GET', url);
       xhr.send();
@@ -68,10 +68,10 @@
       xhr.addEventListener('timeout', function () {
         onError('Запрос не успел выполнится за ' + xhr.timeout + 'мс');
       });
-      xhr.timeout = 100; 
+      xhr.timeout = 100;
 
       xhr.open('POST', url);
       xhr.send(data);
     }
-  }
+  };
 })();

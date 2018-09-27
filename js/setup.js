@@ -2,7 +2,7 @@
 (function () {
   var similarList = document.querySelector('.setup-similar-list');
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-  
+
   // Функция создания DOM-элементов
   var renderHeroes = function (wizard, element) {
     var similarItem = element.cloneNode(true);
