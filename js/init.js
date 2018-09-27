@@ -3,18 +3,13 @@
 (function () {
   window.util.removeClass('.setup', 'hidden');
 
-//  var heroes = [];
-//  window.setup.createArray(heroes);
-
-  var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
-  var similarList = document.querySelector('.setup-similar-list');
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
-  var form = setup.querySelector('.setup-wizard-form');
 
-  window.setup.addElements(similarWizardTemplate, similarList);
-  window.setup.formSubmit(form);
+  window.backend.load(window.setup.successHandler, window.setup.errorHandler);
+  window.backend.save(new FormData(window.setup.form), window.setup.formSubmit, window.setup.errorHandler);
+
   window.util.removeClass('.setup-similar', 'hidden');
 
   var originalCoordinates = {
