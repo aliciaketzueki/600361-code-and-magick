@@ -1,11 +1,22 @@
 'use strict';
 (function () {
-  var url = 'https://js.dump.academy/code-and-magick';
   window.backend = {
+    // Загрузка данных
     load: function (onLoad, onError) {
+      var url = 'https://js.dump.academy/code-and-magick/data';
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'json';
 
+      xhr.addEventListener('load', function () {
+        onLoad(xhr.response);
+      });
+
+      xhr.open('GET', url);
+      xhr.send();
     },
+    // Сохранение данных и закрытие диалогового окна
     save: function (data, onLoad, onError) {
+      var url = 'https://js.dump.academy/code-and-magick';
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'json';
 

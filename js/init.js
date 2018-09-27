@@ -3,21 +3,19 @@
 (function () {
   window.util.removeClass('.setup', 'hidden');
 
-  var heroes = [];
-  window.setup.createArray(heroes);
+//  var heroes = [];
+//  window.setup.createArray(heroes);
 
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
   var similarList = document.querySelector('.setup-similar-list');
-  window.setup.addElements(heroes, similarWizardTemplate, similarList);
-
-  window.util.removeClass('.setup-similar', 'hidden');
-
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
   var form = setup.querySelector('.setup-wizard-form');
 
+  window.setup.addElements(similarWizardTemplate, similarList);
   window.setup.formSubmit(form);
+  window.util.removeClass('.setup-similar', 'hidden');
 
   var originalCoordinates = {
     x: setup.style.left,
