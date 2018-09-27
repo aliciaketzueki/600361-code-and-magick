@@ -5,6 +5,10 @@
     removeClass: function (className, removedClass) {
       document.querySelector(className).classList.remove(removedClass);
     },
+    // Функция добавления класса
+    addClass: function (className, addedClass) {
+      document.querySelector(className).classList.add(addedClass);
+    },
     // Функция создания массива
     createArr: function (arrStart, arrLength) {
       var arr = [];

@@ -15,6 +15,9 @@
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
+  var form = setup.querySelector('.setup-wizard-form');
+
+  window.setup.formSubmit(form);
 
   var originalCoordinates = {
     x: setup.style.left,

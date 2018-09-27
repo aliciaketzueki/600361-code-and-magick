@@ -29,6 +29,15 @@
         fragment.appendChild(renderHeroes(arr[i], element));
       }
       destination.appendChild(fragment);
+    },
+    // Функция отправки формы
+    formSubmit: function (element) {
+      element.addEventListener('submit', function (evt) {
+        window.backend.save(new FormData (element), function (response) {
+          window.util.addClass('.setup', 'hidden');
+        });
+        evt.preventDefault();
+      });
     }
   };
 })();
