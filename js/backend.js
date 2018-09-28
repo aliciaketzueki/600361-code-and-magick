@@ -32,7 +32,7 @@
       xhr.addEventListener('timeout', function () {
         onError('Запрос не успел выполнится за ' + xhr.timeout + 'мс');
       });
-      xhr.timeout = 100;
+      xhr.timeout = 10000;
 
       xhr.open('GET', url);
       xhr.send();
@@ -68,7 +68,7 @@
       xhr.addEventListener('timeout', function () {
         onError('Запрос не успел выполнится за ' + xhr.timeout + 'мс');
       });
-      xhr.timeout = 100;
+      xhr.timeout = 10000;
 
       xhr.open('POST', url);
       xhr.send(data);

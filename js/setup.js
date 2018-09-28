@@ -11,7 +11,10 @@
     similarItem.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
     return similarItem;
   };
-
+  // Успешная отправка формы
+  var successFormHandler = function () {
+    window.util.addClass('.setup', 'hidden');
+  };
   window.setup = {
     // Функция создания массива волшебников
     createArray: function (arr) {
@@ -49,8 +52,9 @@
     // Функция отправки формы
     formSubmit: function () {
       window.setup.form.addEventListener('submit', function (evt) {
-        window.util.addClass('.setup', 'hidden');
         evt.preventDefault();
+        var formData = new FormData(window.setup.form);
+        window.backend.save(formData, successFormHandler, window.setup.errorHandler);
       });
     }
   };

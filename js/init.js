@@ -8,7 +8,7 @@
   var setupClose = setup.querySelector('.setup-close');
 
   window.backend.load(window.setup.successHandler, window.setup.errorHandler);
-  window.backend.save(new FormData(window.setup.form), window.setup.formSubmit, window.setup.errorHandler);
+  window.setup.formSubmit();
 
   window.util.removeClass('.setup-similar', 'hidden');
 
