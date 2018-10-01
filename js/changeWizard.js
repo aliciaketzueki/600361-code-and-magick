@@ -1,11 +1,5 @@
 'use strict';
 (function () {
-  // Функция изменения цвета
-  var changeWizardColor = function (arr, wizardColor, wizardColorInput) {
-    var newWizardColor = window.util.getRandomElement(arr);
-    wizardColor.style.fill = newWizardColor;
-    wizardColorInput[0].value = newWizardColor;
-  };
   window.changeWizard = {
     // Функция изменения цвета мантии
     changeCoatColor: function () {
@@ -13,7 +7,10 @@
       var wizardCoatInput = document.getElementsByName('coat-color');
 
       wizardCoat.addEventListener('click', function () {
-        changeWizardColor(window.const.COAT_COLOR_ARR, wizardCoat, wizardCoatInput);
+        var newWizardColor = window.util.getRandomElement(window.const.COAT_COLOR_ARR);
+        wizardCoat.style.fill = newWizardColor;
+        wizardCoatInput[0].value = newWizardColor;
+        window.filter.onCoatChange(newWizardColor);
       });
     },
     // Функция изменения цвета глаз
@@ -22,7 +19,10 @@
       var wizardEyesInput = document.getElementsByName('eyes-color');
 
       wizardEyes.addEventListener('click', function () {
-        changeWizardColor(window.const.EYES_COLOR_ARR, wizardEyes, wizardEyesInput);
+        var newWizardColor = window.util.getRandomElement(window.const.EYES_COLOR_ARR);
+        wizardEyes.style.fill = newWizardColor;
+        wizardEyesInput[0].value = newWizardColor;
+        window.filter.onEyesChange(newWizardColor);
       });
     },
     // Функция изменения цвета фаербола
