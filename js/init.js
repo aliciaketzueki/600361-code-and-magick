@@ -7,10 +7,8 @@
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
 
-  window.backend.load(window.filter.successHandler, window.filter.errorHandler);
   window.setup.formSubmit();
-
-  window.util.removeClass('.setup-similar', 'hidden');
+  window.backend.load(window.filter.successHandler, window.filter.errorHandler);
 
   var originalCoordinates = {
     x: setup.style.left,

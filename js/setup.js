@@ -15,6 +15,7 @@
   var successFormHandler = function () {
     window.util.addClass('.setup', 'hidden');
   };
+
   window.setup = {
     // Функция создания массива волшебников
     createArray: function (arr) {
@@ -45,7 +46,7 @@
       window.setup.form.addEventListener('submit', function (evt) {
         evt.preventDefault();
         var formData = new FormData(window.setup.form);
-        window.backend.save(formData, successFormHandler, window.setup.errorHandler);
+        window.backend.save(formData, successFormHandler, window.filter.errorHandler);
       });
     }
   };
