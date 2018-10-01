@@ -39,14 +39,14 @@
   };
 
   window.filter = {
-    onCoatChange: function (color) {
+    onCoatChange: window.util.debounce(function (color) {
       coatColor = color;
       updateWizards();
-    },
-    onEyesChange: function (color) {
+    }),
+    onEyesChange: window.util.debounce(function (color) {
       eyesColor = color;
       updateWizards();
-    },
+    }),
     // Функция добавления DOM-элементов
     successHandler: function (data) {
       wizards = data;
