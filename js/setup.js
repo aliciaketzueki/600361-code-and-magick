@@ -4,11 +4,11 @@
   var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
 
   // Функция создания DOM-элементов
-  var renderHeroes = function (wizard, element) {
-    var similarItem = element.cloneNode(true);
-    similarItem.querySelector('.setup-similar-label').textContent = wizard.name;
-    similarItem.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
-    similarItem.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
+  var renderHeroes = function (arr) {
+    var similarItem = similarWizardTemplate.cloneNode(true);
+    similarItem.querySelector('.setup-similar-label').textContent = arr.name;
+    similarItem.querySelector('.wizard-coat').style.fill = arr.colorCoat;
+    similarItem.querySelector('.wizard-eyes').style.fill = arr.colorEyes;
     return similarItem;
   };
   // Успешная отправка формы
@@ -28,13 +28,20 @@
       }
       return arr;
     },
-    // Функция добавления DOM-элементов
-    successHandler: function (wizards) {
+    drawHeroes: function (arr) {
       var fragment = document.createDocumentFragment();
-      for (var i = 0; i < 4; i++) {
-        fragment.appendChild(renderHeroes(wizards[i], similarWizardTemplate));
+      var takeNumber = arr.length > 4 ? 4 : arr.length;
+      similarList.innerHTML = '';
+      for (var i = 0; i < takeNumber; i++) {
+        fragment.appendChild(renderHeroes(arr[i]));
       }
       similarList.appendChild(fragment);
+
+      window.util.removeClass('.setup-similar', 'hidden');
+    },
+    // Функция добавления DOM-элементов
+    successHandler: function (wizards) {
+      window.setup.drawHeroes(wizards);
     },
     // Функция высвечивания ошибки на экране
     errorHandler: function (errorMessage) {
