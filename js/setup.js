@@ -1,14 +1,20 @@
 'use strict';
 (function () {
+  var similarList = document.querySelector('.setup-similar-list');
+  var similarWizardTemplate = document.querySelector('#similar-wizard-template').content.querySelector('.setup-similar-item');
+
   // Функция создания DOM-элементов
-  var renderHeroes = function (arr, element) {
+  var renderHeroes = function (wizard, element) {
     var similarItem = element.cloneNode(true);
-    similarItem.querySelector('.setup-similar-label').textContent = arr.name;
-    similarItem.querySelector('.wizard-coat').style.fill = arr.coatColor;
-    similarItem.querySelector('.wizard-eyes').style.fill = arr.eyesColor;
+    similarItem.querySelector('.setup-similar-label').textContent = wizard.name;
+    similarItem.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+    similarItem.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
     return similarItem;
   };
-
+  // Успешная отправка формы
+  var successFormHandler = function () {
+    window.util.addClass('.setup', 'hidden');
+  };
   window.setup = {
     // Функция создания массива волшебников
     createArray: function (arr) {
@@ -23,12 +29,33 @@
       return arr;
     },
     // Функция добавления DOM-элементов
-    addElements: function (arr, element, destination) {
+    successHandler: function (wizards) {
       var fragment = document.createDocumentFragment();
-      for (var i = 0; i < arr.length; i++) {
-        fragment.appendChild(renderHeroes(arr[i], element));
+      for (var i = 0; i < 4; i++) {
+        fragment.appendChild(renderHeroes(wizards[i], similarWizardTemplate));
       }
-      destination.appendChild(fragment);
+      similarList.appendChild(fragment);
+    },
+    // Функция высвечивания ошибки на экране
+    errorHandler: function (errorMessage) {
+      var node = document.createElement('div');
+      node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+      node.style.position = 'absolute';
+      node.style.left = 0;
+      node.style.right = 0;
+      node.style.fontSize = '30px';
+
+      node.textContent = errorMessage;
+      document.body.insertAdjacentElement('afterbegin', node);
+    },
+    form: document.querySelector('.setup-wizard-form'),
+    // Функция отправки формы
+    formSubmit: function () {
+      window.setup.form.addEventListener('submit', function (evt) {
+        evt.preventDefault();
+        var formData = new FormData(window.setup.form);
+        window.backend.save(formData, successFormHandler, window.setup.errorHandler);
+      });
     }
   };
 })();
