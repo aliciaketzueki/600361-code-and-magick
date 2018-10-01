@@ -27,6 +27,20 @@
         var randomElement = arr[rand];
       }
       return randomElement;
+    },
+    // Функция установки таймера
+    debounce: function (fun) {
+      var lastTimeout = null;
+
+      return function () {
+        var args = arguments;
+        if (lastTimeout) {
+          window.clearTimeout(lastTimeout);
+        }
+        lastTimeout = window.setTimeout(function () {
+          fun.apply(null, args);
+        }, window.const.DEBOUNCE_INTERVAL);
+      };
     }
   };
 })();
