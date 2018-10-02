@@ -23,4 +23,6 @@
   window.changeWizard.changeFireballColor();
 
   window.dialogMove.changeDialogPosition(setup);
+
+  window.avatar.loadAvatar();
 })();

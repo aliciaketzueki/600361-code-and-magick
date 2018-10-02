@@ -9,6 +9,6 @@
     EYES_COLOR_ARR: ['black', 'red', 'blue', 'yellow', 'green'],
     FIREBALL_COLOR_ARR: ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'],
     DEBOUNCE_INTERVAL: 500,
-    FILE_IMG_TYPES: ['png', 'jpg', 'svg', 'gif']
+    FILE_IMG_TYPES: ['png', 'jpg', 'jpeg', 'gif']
   };
 })();
